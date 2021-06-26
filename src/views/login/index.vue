@@ -5,11 +5,14 @@
       <div class="themePaddinglr login-content-phone">
         <ul>
           <li>
-            <!-- <mt-picker :slots="slots" @change="onValuesChange"></mt-picker> -->
+            <mt-actionsheet
+              :actions="actions"
+              v-model="sheetVisible">
+            </mt-actionsheet>
             <mt-field label="email"></mt-field>
           </li>
           <li>
-            <mt-button class="themeBgColor_light whiteColor">获取验证码</mt-button>
+            <mt-button class="themeBgColor_light whiteColor" @click="loginSubmit">获取验证码</mt-button>
           </li>
           <li class="whiteColor">密码登录</li>
         </ul>
@@ -25,6 +28,12 @@ export default {
   name:"Login",
   data(){
       return {
+        sheetVisible:true,
+        actions:[
+          {name:'1',value:'DDD'},
+          {name:'2',value:'DDD'},
+          {name:'3',value:'DDD'}
+        ],
         slots: [
           {
             flex: 1,
@@ -36,7 +45,6 @@ export default {
       }
   },
   mounted(){
-    this.loginSubmit();
   },
   methods:{
     ...mapMutations([
@@ -53,7 +61,7 @@ export default {
             if (errorCode === '000000') {
               console.log(data,666)
               this.setToken(data.token);
-              // this.$router.push('/home');
+              this.$router.push('/home');
             } else {
               this.$message.error(errorMessage);
             }
