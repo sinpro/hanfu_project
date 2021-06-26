@@ -1,13 +1,15 @@
 <template>
   <div class="login">
     <div class="login-content">
-      <div></div>
+      <div class="empty"></div>
       <div class="themePaddinglr login-content-phone">
         <ul>
           <li>
             <mt-actionsheet
               :actions="actions"
-              v-model="sheetVisible">
+              cancelText=""
+              v-model="sheetVisible"
+            >
             </mt-actionsheet>
             <mt-field label="email"></mt-field>
           </li>
@@ -17,7 +19,7 @@
           <li class="whiteColor">密码登录</li>
         </ul>
       </div>
-      <div class="whiteColor themePaddinglr">登录即表示同意<span class="themeColor_dark">《用户协议》</span>和<span class="themeColor_dark">《隐私协议》</span></div>
+      <div class="whiteColor themePaddinglr agrees">登录即表示同意<span class="themeColor_dark">《用户协议》</span>和<span class="themeColor_dark">《隐私协议》</span></div>
     </div>
   </div>
 </template>
@@ -30,6 +32,21 @@ export default {
       return {
         sheetVisible:true,
         actions:[
+          {name:'1',value:'DDD'},
+          {name:'2',value:'DDD'},
+          {name:'3',value:'DDD'},
+          {name:'1',value:'DDD'},
+          {name:'2',value:'DDD'},
+          {name:'3',value:'DDD'},
+          {name:'1',value:'DDD'},
+          {name:'2',value:'DDD'},
+          {name:'3',value:'DDD'},
+          {name:'1',value:'DDD'},
+          {name:'2',value:'DDD'},
+          {name:'3',value:'DDD'},
+          {name:'1',value:'DDD'},
+          {name:'2',value:'DDD'},
+          {name:'3',value:'DDD'},
           {name:'1',value:'DDD'},
           {name:'2',value:'DDD'},
           {name:'3',value:'DDD'}
@@ -87,7 +104,7 @@ export default {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    div:nth-child(1){
+    .empty{
       display: flex;
       flex: 6;
     }
@@ -104,7 +121,7 @@ export default {
         }
       }
     }
-    div:nth-child(3){
+    .agrees{
       display: flex;
       flex: 1;
     }
