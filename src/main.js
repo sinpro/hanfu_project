@@ -2,10 +2,11 @@ import Vue from 'vue';
 import App from './app.vue';
 import router from './router';
 
-
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
-Vue.use(MintUI)
+Vue.use(MintUI);
+
+import store from './store';
 
 // demo环境
 if(isMockEnv){
