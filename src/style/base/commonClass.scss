@@ -11,6 +11,9 @@
 .cursorPot:hover{
   cursor: pointer;
 }
+.transparentBg{
+  background: transparent;
+}
 .themeBgColor_light{
   background: #42B3BE;
 }
@@ -22,5 +25,11 @@
 }
 .whiteColor{color: #FFFFFF;}
 .themePaddinglr{
-  padding: 0 2rem;
+  padding: 0 .4rem;
+}
+.borderRadius48{
+  border-radius: .48rem;
+}
+.wdt100{
+  width: 100%;
 }

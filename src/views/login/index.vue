@@ -4,19 +4,26 @@
       <div class="empty"></div>
       <div class="themePaddinglr login-content-phone">
         <ul>
-          <li>
-            <mt-actionsheet
-              :actions="actions"
-              cancelText=""
-              v-model="sheetVisible"
-            >
-            </mt-actionsheet>
-            <mt-field label="email"></mt-field>
+          <li class="clearfix">
+            <span class="whiteColor fll" @click="openSwitch('isVisible')">{{defaultGlobalRoaming}}</span>
+            <nut-textinput
+              class="fll transparentBg" 
+              v-model="phoneVal"
+              :has-border="false"
+              :clear-btn="false"
+            />
+            <nut-picker
+              :is-visible="isVisible"
+              :list-data="globalRoaming"
+              :default-value-data="defaultValueData"
+              @close="closeSwitch('isVisible')"
+              @confirm="confirm"
+            ></nut-picker>
           </li>
           <li>
-            <mt-button class="themeBgColor_light whiteColor" @click="loginSubmit">获取验证码</mt-button>
+            <nut-button class="themeBgColor_light whiteColor" @click="()=>$router.push('/login/verificateCode')">获取验证码</nut-button>
           </li>
-          <li class="whiteColor">密码登录</li>
+          <li class="whiteColor" @click="()=>$router.push('/login/passwordLogin')">密码登录</li>
         </ul>
       </div>
       <div class="whiteColor themePaddinglr agrees">登录即表示同意<span class="themeColor_dark">《用户协议》</span>和<span class="themeColor_dark">《隐私协议》</span></div>
@@ -26,44 +33,34 @@
 <script>
 import api from 'apis/common';
 import { mapMutations } from "vuex";
+import globalRoaming from 'src/dictionarys';
 export default {
   name:"Login",
   data(){
       return {
-        sheetVisible:true,
-        actions:[
-          {name:'1',value:'DDD'},
-          {name:'2',value:'DDD'},
-          {name:'3',value:'DDD'},
-          {name:'1',value:'DDD'},
-          {name:'2',value:'DDD'},
-          {name:'3',value:'DDD'},
-          {name:'1',value:'DDD'},
-          {name:'2',value:'DDD'},
-          {name:'3',value:'DDD'},
-          {name:'1',value:'DDD'},
-          {name:'2',value:'DDD'},
-          {name:'3',value:'DDD'},
-          {name:'1',value:'DDD'},
-          {name:'2',value:'DDD'},
-          {name:'3',value:'DDD'},
-          {name:'1',value:'DDD'},
-          {name:'2',value:'DDD'},
-          {name:'3',value:'DDD'}
-        ],
-        slots: [
-          {
-            flex: 1,
-            values: ['1', '2', '3', '4', '5', '6'],
-            className: 'slot1',
-            textAlign: 'right'
-          }
-        ]
+        defaultGlobalRoaming:'',
+        phoneVal: "",
+        isVisible: false,
+        defaultValueData: null,
+        globalRoaming,
       }
   },
   mounted(){
+    console.log(globalRoaming[0][0],111)
+    this.defaultGlobalRoaming=globalRoaming[0][0].value;
   },
   methods:{
+    openSwitch(param) {
+      this[`${param}`] = true;
+    },
+
+    closeSwitch(param) {
+      this[`${param}`] = false;
+    },
+
+    confirm(chooseData) {
+      this.defaultGlobalRoaming = `${chooseData[0].value}`;
+    },
     ...mapMutations([
       "setToken"
     ]),
@@ -78,7 +75,7 @@ export default {
             if (errorCode === '000000') {
               console.log(data,666)
               this.setToken(data.token);
-              this.$router.push('/home');
+              this.$router.push('/home/index');
             } else {
               this.$message.error(errorMessage);
             }
@@ -110,14 +107,35 @@ export default {
     }
     &-phone{
       display: flex;
-      flex: 3;
+      flex: 4;
       ul{
+        padding: 0 .2rem;
         li{
-          // height: 6rem;
-          button{
-            border-radius: 48px;
-            width:40rem;
+          margin-bottom: 15px;
+          .transparentBg{
+            /deep/ input{
+              background: transparent;
+              width: 3rem;
+            }
           }
+          span.whiteColor{
+            display: inline-block;
+            background: url('../../images/icon/down-drop.png') no-repeat;
+            background-position: 100% 50%;
+            background-size: 45% 110%;
+            padding-right: 23px;
+            margin-top: 14px;
+            /deep/ i{
+              color: rgb(255, 255, 255)!important;
+            }
+          }
+          button{
+            border-radius: .48rem;
+            width:4rem;
+          }
+        }
+        li:nth-child(1){
+          border-bottom: 1px solid #fff;
         }
       }
     }

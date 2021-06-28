@@ -24,5 +24,5 @@ module.exports = {
 	},
 
 	overLay: false,
-	autoOpenBrowser: false
+	autoOpenBrowser: true
 }
