@@ -23,19 +23,18 @@ const constantRoutes = [
 ];
 // 需求动态判断权限并通过addRoutes 动态添加的页面
 const asyncRoutes = [
-  ...home, // 首页模块
   ...login, // 登录
   {
-    path: '/layout',
-    name: 'layout',
+    path: '/bankMain',
+    name: 'bankMain',
     component: resolve =>
       require.ensure(
         [],
-        () => resolve(require('src/components/layout')),
-        'Layout'
+        () => resolve(require('src/components/bankMain')),
+        'bankMain'
       ),
     children:[
-      // ...accountManagement, // 账户管理
+      ...home, // 首页模块
     ]
   },
 ];

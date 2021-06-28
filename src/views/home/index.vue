@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    
+    2321332
   </div>
 </template>
 <script>
@@ -10,6 +10,8 @@ export default {
       return {
 
       }
+  },
+  components:{
   },
   mounted(){
     
