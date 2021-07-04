@@ -1,39 +1,22 @@
 <template>
   <div class="bank-footer">
     <ul>
-      <li v-for="item in tabList" :key="item.tabTitle">
+      <li v-for="item in tabList" :key="item.tabTitle" @click="tabLoad(item)" :class="item.url===$route.path?'selectAct':''">
         <img :src="item.icon" alt="">
         <span>{{item.tabTitle}}</span>
       </li>
       <div class="release" @click="releaseHandle">
         <div class="release-add">
-          <!-- <nut-icon type="plus"></nut-icon> -->
           <img src="../../images/icon/plus_white.png" alt="">
         </div>
       </div>
-      <!-- 弹窗 -->
-      <nut-actionsheet :is-visible="isVisible" 
-          @close="()=>null"
-          @choose="chooseItem"
-      >
-        <div slot="custom" class="custom-wrap">
-          <ul>
-            <li></li>
-            <li></li>
-            <p>
-              <span @click="releaseHandle"><img src="../../images/icon/close_white.png" alt=""></span>
-            </p>
-          </ul>
-          
-        </div>
-        <!-- <div slot="cancel" class="cancel-wrap">
-          取消
-        </div> -->
-      </nut-actionsheet>
     </ul>
+    <!-- 弹窗 -->
+    <release :isVisible.sync="releaseShow"></release>
   </div>
 </template>
 <script>
+import release from './release';
 export default {
   name:'BankFooter',
   data(){
@@ -42,50 +25,34 @@ export default {
         {
           'tabTitle':'广场',
           'curr':true,
-          'icon':'http://img13.360buyimg.com/uba/jfs/t30331/209/562746340/2190/6619973d/5bf763aaN6ff02099.jpg',
-          'activeIcon':'http://img20.360buyimg.com/uba/jfs/t28675/125/569589124/2710/fe1b0e7c/5bf79218Nbc49fc24.jpg'
+          url:'/square',
         },
         {
           'tabTitle':'遇见',
           'curr':false,
-          'icon':'http://img13.360buyimg.com/uba/jfs/t27280/289/2061314663/2392/872e32ff/5bf76318Ndc80c1d8.jpg',
-          'activeIcon':'http://img14.360buyimg.com/uba/jfs/t28468/128/565494642/3313/ce508dd6/5bf79214Nab2a3076.jpg'
+          url:'/meet',
         },
         {
           'tabTitle':'发布',
           'curr':false,
-          'icon':'',
-          'activeIcon':''
+          url:'/square',
         },
         {
           'tabTitle':'聊天',
           'curr':false,
-          'icon':'http://img10.360buyimg.com/uba/jfs/t26779/215/2118525153/2413/470d1613/5bf767b2N075957b7.jpg',
-          'activeIcon':'http://img11.360buyimg.com/uba/jfs/t27370/260/2117900302/3274/bd097e85/5bf7921bNafc526e2.jpg'
+          url:'/chat',
         },
         {
           'tabTitle':'我的',
           'curr':false,
-          'icon':'http://img10.360buyimg.com/uba/jfs/t26779/215/2118525153/2413/470d1613/5bf767b2N075957b7.jpg',
-          'activeIcon':'http://img11.360buyimg.com/uba/jfs/t27370/260/2117900302/3274/bd097e85/5bf7921bNafc526e2.jpg'
+          url:'/myself',
         }
       ],
-      sex: '请选择',
-      isVisible: false,
-      menuItems: [
-          {
-              'name': '男',
-              'value': 0
-          },
-          {
-              'name': '女',
-              'value': 1
-          }
-      ]
+      releaseShow:false,
     }
   },
   components:{
-
+    release,
   },
   mounted(){
 
@@ -93,18 +60,12 @@ export default {
   watch:{
   },
   methods: {
-    tabSwitch1:function(value,index){
-      console.log(index);
+    tabLoad(key){
+      console.log(key);
+      this.$router.push(key.url)
     },
     releaseHandle(){
-      this.isVisible = !this.isVisible;
-    },
-    switchActionSheet() {
-        this.isVisible = !this.isVisible;
-    },
-
-    chooseItem(itemParams) {
-        this.sex = itemParams.name;
+      this.releaseShow = true;
     }
   }
 }
@@ -131,6 +92,16 @@ export default {
         width: .4rem;
         height: .4rem;
         background: #D8D8D8;
+      }
+      span{
+        font-size: .2rem;
+        color: #8C8C8C;
+      }
+    }
+    .selectAct{
+      span{
+        font-size: .2rem;
+        color: #42B3BE;
       }
     }
     .release{
@@ -160,43 +131,6 @@ export default {
       }
     }
   }
-  .custom-wrap{
-    width: 100%;
-    padding: .4rem;
-    background-color: #fff;
-    ul{
-      li{
-        width: 100%;
-        height: 1.5rem;
-        border-radius: 16px;
-        box-shadow: 0px 6px 20px 0px rgba(39,39,40,0.04);
-      }
-      li:nth-child(1){
-        background-image: linear-gradient(127deg, #FFC34A 0%, #FF9A22 100%);
-      }
-      li:nth-child(2){
-        background-image: linear-gradient(127deg, #82D5DD 0%, #42B3BE 100%);
-        margin-top: .48rem;
-        margin-bottom: .8rem;
-      }
-      p{
-        text-align: center;
-        span{
-          display: inline-block;
-          width: .96rem;
-          height: .96rem;
-          border-radius: 100%;
-          background-color: #42B3BE;
-          text-align: center;
-          line-height: 1.2rem;
-          img{
-            width: .45rem;
-            height: .45rem;
-            display: inline-block;
-          }
-        }
-      }
-    }
-  }
+  
 }
 </style>

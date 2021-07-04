@@ -2,6 +2,7 @@ export default [
   { //登录
     path: '/home',
     name: 'Home',
+    redirect:'/square',
     component:
       resolve =>
         require.ensure(

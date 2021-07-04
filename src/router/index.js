@@ -4,6 +4,11 @@ Vue.use(Router);
 
 import store from 'src/store';
 import routes from './routes';
+
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 const router = new Router({
   mode: 'hash',
   scrollBehavior: () => ({

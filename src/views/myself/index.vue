@@ -1,27 +1,23 @@
 <template>
-  <div class="more-feature">
-    
+  <div class="myself">
+    我的
   </div>
 </template>
 <script>
 export default {
-  name:'BankHeader',
-  props:{
-    
-  },
+  name:"Myself",
   data(){
     return {
       
     }
   },
-  computed: {
+  components:{
     
   },
   mounted(){
     
   },
   methods:{
-    
   }
 }
 </script>

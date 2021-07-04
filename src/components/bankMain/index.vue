@@ -1,6 +1,6 @@
 <template>
   <div class="bank-main">
-    <bankHeader :isBack="false"/>
+    <!-- <bankHeader :isBack="false"/> -->
     <div class="bank-main-content">
       <router-view></router-view>
     </div>
@@ -37,11 +37,12 @@ export default {
 .bank-main{
   &-content{
     position: fixed;
-    top: .88rem;
+    top: 0;
     bottom: 1rem;
     left:0;
     background-color:#d1d1d1;
     width: 100%;
+    // padding: 0 .4rem;
   }
 }
 </style>

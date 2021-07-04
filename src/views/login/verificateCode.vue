@@ -3,7 +3,7 @@
       <ul>
           <li>请输入验证码</li>
           <li>验证码以发送至&nbsp;&nbsp;<span>13145240506</span></li>
-          <li><msyCode/></li>
+          <li><msyCode @complete="keyComplete"/></li>
           <li><span>{{ times }}s</span>后重新发送验证码</li>
       </ul>
   </div>
@@ -31,9 +31,14 @@ export default {
         this.times--
         if(this.times===0){
           this.show = true
-          clearInterval(this.timer)
+          clearInterval(this.timer);
+          this.$router.go(-1)
         }
       },1000)
+    },
+    keyComplete(key){
+      console.log(key,111)
+      this.$router.push('/home')
     }
   }
 }

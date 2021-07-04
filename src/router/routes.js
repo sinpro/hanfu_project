@@ -1,5 +1,17 @@
 import login from './login'; // 登录
 import home from './home'; // 首页
+import square from './square'; // 广场
+import meet from './meet'; // 遇见
+// import square from './square'; // 发布
+import chat from './chat'; // 聊天
+import myself from './myself'; // 我的
+
+
+
+
+// import follow from './follow'; // 关注
+// import videoScreen from './videoScreen'; // 视屏
+// import designCompetition from './designCompetition'; // 设计大赛
 
 
 // 不需要动态判断权限
@@ -35,6 +47,14 @@ const asyncRoutes = [
       ),
     children:[
       ...home, // 首页模块
+      ...square, // 广场
+      ...meet, // 广场
+      ...chat, // 广场
+      ...myself, // 广场
+
+      // ...follow,
+      // ...videoScreen,
+      // ...designCompetition,
     ]
   },
 ];

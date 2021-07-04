@@ -2,7 +2,7 @@
   <div class="bank-header themePaddinglr">
     <img v-if="isBack" src="../../images/icon/back_left.png" alt="" @click="()=>$router.go(-1)">
     <ul v-else class="bank-header-nav">
-      <li v-for="item in navList" :key="item.id" :class="item.isAct?'actHover':''">
+      <li v-for="item in navList" :key="item.id" :class="item.url===$route.path?'actHover':''">
         <span @click="switchNav(item)">{{item.name}}</span>
       </li>
       <li>
@@ -23,10 +23,10 @@ export default {
   data(){
     return {
       navList:[
-        {name:'关注',id:1,isAct:true},
-        {name:'广场',id:2,isAct:false},
-        {name:'视屏',id:3,isAct:false},
-        {name:'设计大赛',id:4,isAct:false},
+        {name:'关注',id:1,isAct:true,url:'/follow'},
+        {name:'广场',id:2,isAct:false,url:'/square'},
+        {name:'视屏',id:3,isAct:false,url:'/videoScreen'},
+        {name:'设计大赛',id:4,isAct:false,url:'/designCompetition'},
       ]
     }
   },
@@ -34,17 +34,16 @@ export default {
     
   },
   mounted(){
-    
   },
   methods:{
     switchNav(key){
      this.navList.forEach(item=>{
-       if(item.id===key.id){
-         item.isAct=true
-       }else{
-         item.isAct=false
-       }
-       
+      //  if(item.id===key.id){
+      //    item.isAct=true
+      //  }else{
+      //    item.isAct=false
+      //  }
+       this.$router.push(key.url)
      })
     },
     tabSwitch: function(index, event) {
@@ -56,6 +55,7 @@ export default {
 <style lang="scss" scoped>
 .bank-header{
   height: .88rem;
+  background-color: #fff;
   img{
     width: .48rem;
     height: .48rem;
